@@ -1,0 +1,54 @@
+--tabla cliente
+create table cliente (
+id_cliente int primary key,
+ci_cliente varchar(10) not null unique,
+nombre_cliente varchar(40) not null,
+apellido_cliente varchar(40) not null,
+correo_cliente varchar(25) null,
+telefono_cliente varchar(10) not null
+);
+insert into cliente (id_cliente,ci_cliente,nombre_cliente,apellido_cliente,correo_cliente,telefono_cliente) values ('001','1804324566','Xavier David','Aldaz Castro','daniel.150@gmail.com','0987489268');
+select * from cliente
+--tabla pedido
+create table pedido (
+id_pedido int primary key,
+id_cliente int not null,
+no_pedido Varchar(10) not null unique,
+descripcion_pedido Varchar(40),
+estado_pedido Varchar(20),
+fecha_pedido date,
+precio_pedido Money,
+foreign key (id_cliente) references cliente(id_cliente)
+);
+insert into pedido (id_pedido,id_cliente,no_pedido,descripcion_pedido,estado_pedido,fecha_pedido,precio_pedido) values ('001','001','pe001','Pedido para el señor Xavier','aceptado','08/07/2020','120');
+select * from pedido
+
+--tabla pedido
+create table pedido (
+id_pedido int primary key,
+id_cliente int not null,
+no_pedido Varchar(10) not null unique,
+descripcion_pedido Varchar(40),
+estado_pedido Varchar(20),
+fecha_pedido date,
+precio_pedido Money,
+foreign key (id_cliente) references cliente(id_cliente)
+);
+--tabla direccion
+create table direccion (
+id_direccion int primary key,
+id_cliente int not null,
+ciudad_direccion Varchar(52) not null unique,
+descripcion_direccion Varchar(52),
+foreign key (id_cliente) references cliente(id_cliente)
+);
+--tabla articulo
+create table articulo (
+id_articulo int primary key,
+id_pedido int not null,
+descripcion_articulo Varchar(52) not null unique,
+cantidad_articulo int not null,
+valor_articulo money not null,
+valortot_articulo money not null,
+foreign key (id_pedido) references pedido(id_pedido)
+);
